@@ -7,10 +7,6 @@ namespace Blocktrade
     public partial class BlocktradeClient : IDisposable
     {
         private readonly HttpClient _httpClient;
-        private readonly JsonSerializerOptions _jsonSerializerOptions = new()
-        {
-            PropertyNamingPolicy = Chubrik.Json.JsonNamingPolicies.SnakeLowerCase,
-        };
 
         public BlocktradeClient() 
         {

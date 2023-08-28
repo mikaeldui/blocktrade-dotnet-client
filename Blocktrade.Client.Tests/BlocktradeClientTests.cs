@@ -50,5 +50,43 @@ namespace Blocktrade.Tests
             using BlocktradeClient blocktradeClient = new();
             var orderBook = await blocktradeClient.GetOrderBookAsync(12345678);
         }
+
+        [TestMethod]
+        public async Task GetTickerAsync()
+        {
+            using BlocktradeClient blocktradeClient = new();
+            var tradingPairs = await blocktradeClient.GetTradingPairsAsync();
+            Assert.IsNotNull(tradingPairs);
+            var ticker = await blocktradeClient.GetTickerAsync(tradingPairs.First());
+            Assert.IsNotNull(ticker);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(TickerNotFoundException))]
+        public async Task GetTickerNotFoundAsync()
+        {
+            using BlocktradeClient blocktradeClient = new();
+            var orderBook = await blocktradeClient.GetTickerAsync(12345678);
+        }
+
+        [TestMethod]
+        public async Task GetTradesAsync()
+        {
+            using BlocktradeClient blocktradeClient = new();
+            var tradingPairs = await blocktradeClient.GetTradingPairsAsync();
+            Assert.IsNotNull(tradingPairs);
+            var trades = await blocktradeClient.GetTradesAsync(tradingPairs.First());
+            Assert.IsNotNull(trades);
+            Assert.IsNotNull(trades.Data);
+            Assert.IsTrue(trades.Data.Any());
+        }
+
+        //[TestMethod]
+        //[ExpectedException(typeof(OrderBookNotFoundException))]
+        //public async Task GetTradesNotFoundAsync()
+        //{
+        //    using BlocktradeClient blocktradeClient = new();
+        //    var orderBook = await blocktradeClient.GetOrderBookAsync(12345678);
+        //}
     }
 }
