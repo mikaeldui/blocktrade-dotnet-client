@@ -10,9 +10,13 @@ namespace Blocktrade.Tests
     public class TestClass1
     {
         [TestMethod]
-        public void TestMethod1()
+        public async Task GetTradingAssetsAsync()
         {
-
+            using BlocktradeClient blocktradeClient = new BlocktradeClient();
+            var tradingAssets = await blocktradeClient.GetTradingAssetsAsync();
+            Assert.IsNotNull(tradingAssets);
+            Assert.IsTrue(tradingAssets.Any());
+            Assert.IsTrue(tradingAssets.All(ta => string.IsNullOrWhiteSpace(ta.FullName)));
         }
     }
 }
