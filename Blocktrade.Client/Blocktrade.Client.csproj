@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;netstandard2.1;net6.0;net7.0</TargetFrameworks>
+    <LangVersion>latest</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>Blocktrade</RootNamespace>
+    <PackageId>MikaelDui.Blocktrade.Client</PackageId>
+    <Authors>Mikael Dúi Bolinder</Authors>
+    <Product>MikaelDui.Blocktrade.Client</Product>
+    <Description>A .NET client for Blocktrade.</Description>
+    <PackageProjectUrl>https://github.com/mikaeldui/blocktrade-dotnet-client</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>Blocktrade.png</PackageIcon>
+    <RepositoryUrl>https://github.com/mikaeldui/blocktrade-dotnet-client</RepositoryUrl>
+    <PackageTags>{{Tags}}</PackageTags>
+    <PackageLicenseExpression>Unlicense</PackageLicenseExpression>
+    <AssemblyName>MikaelDui.Blocktrade.Client</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\Blocktrade.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>
