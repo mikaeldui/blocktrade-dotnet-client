@@ -5,7 +5,7 @@ using System.Text.Json;
 
 namespace Blocktrade.Json
 {
-    internal class BlocktradeJsonSerializerOptions
+    internal static class BlocktradeJsonSerializerOptions
     {
         private static readonly JsonSerializerOptions _default;
 
