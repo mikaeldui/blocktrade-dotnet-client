@@ -11,7 +11,8 @@ namespace Blocktrade.Security
         private readonly string _apiSecret;
 
         public BlocktradeHttpMessageHandler(string apiKey, string apiSecret) 
-        { 
+        {
+            InnerHandler = new HttpClientHandler();
             _apiKey = apiKey;
             _apiSecret = apiSecret;
         }
