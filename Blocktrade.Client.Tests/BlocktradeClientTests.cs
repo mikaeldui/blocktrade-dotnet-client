@@ -12,11 +12,21 @@ namespace Blocktrade.Tests
         [TestMethod]
         public async Task GetTradingAssetsAsync()
         {
-            using BlocktradeClient blocktradeClient = new BlocktradeClient();
+            using BlocktradeClient blocktradeClient = new();
             var tradingAssets = await blocktradeClient.GetTradingAssetsAsync();
             Assert.IsNotNull(tradingAssets);
             Assert.IsTrue(tradingAssets.Any());
-            Assert.IsTrue(tradingAssets.All(ta => string.IsNullOrWhiteSpace(ta.FullName)));
+            Assert.IsTrue(tradingAssets.All(ta => !string.IsNullOrWhiteSpace(ta.FullName)));
+        }
+
+        [TestMethod]
+        public async Task GetTradingPairsAsync()
+        {
+            using BlocktradeClient blocktradeClient = new();
+            var tradingPairs = await blocktradeClient.GetTradingPairsAsync();
+            Assert.IsNotNull(tradingPairs);
+            Assert.IsTrue(tradingPairs.Any());
+            Assert.IsTrue(tradingPairs.All(ta => !string.IsNullOrWhiteSpace(ta.TickSize)));
         }
     }
 }
