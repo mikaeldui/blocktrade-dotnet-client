@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Blocktrade.Tests
 {
     [TestClass]
-    public class TestClass1
+    public class BlocktradeClientTests
     {
         [TestMethod]
         public async Task GetTradingAssetsAsync()
