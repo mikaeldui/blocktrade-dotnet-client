@@ -31,13 +31,29 @@ namespace Blocktrade.Tests
             _client?.Dispose();
         }
 
-
         [TestMethod]
-        public async Task GetTradingAssetsAsync()
+        public async Task GetUserAsync()
         {
             var user = await _client.GetUserAsync();
             Assert.IsNotNull(user);
             Assert.IsTrue(!string.IsNullOrWhiteSpace(user.Email));
+        }
+
+        [TestMethod]
+        public async Task GetFeesAsync()
+        {
+            var fees = await _client.GetFeesAsync();
+            Assert.IsNotNull(fees);
+            Assert.IsTrue(fees.Any());
+            Assert.IsTrue(fees.First().Value.Any());
+        }
+
+        [TestMethod]
+        public async Task GetOrdersAsync()
+        {
+            var orders = await _client.GetOrdersAsync();
+            Assert.IsNotNull(orders);
+            Assert.IsTrue(orders.Data.Any());
         }
     }
 }

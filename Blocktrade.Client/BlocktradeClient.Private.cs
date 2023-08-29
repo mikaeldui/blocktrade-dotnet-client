@@ -28,6 +28,18 @@ namespace Blocktrade
             return await _httpClient.GetFromJsonAsync<User>("user", BlocktradeJsonSerializerOptions.Default);
         }
 
+        public async Task<FeeType?> GetFeesAsync()
+        {
+            _ensureApiKey();
+            return await _httpClient.GetFromJsonAsync<FeeType>("fees", BlocktradeJsonSerializerOptions.Default);
+        }
+
+        public async Task<UserOrders?> GetOrdersAsync()
+        {
+            _ensureApiKey();
+            return await _httpClient.GetFromJsonAsync<UserOrders>("orders", BlocktradeJsonSerializerOptions.Default);
+        }
+
         private void _ensureApiKey()
         {
             if (_apiKey == null)
