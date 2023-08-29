@@ -21,7 +21,7 @@ namespace Blocktrade.Security
         {
             string? content = null;
             if (request.Content != null) content = await request.Content.ReadAsStringAsync();            
-            var nonce = DateTime.Now.Ticks.ToString();
+            var nonce = DateTimeOffset.Now.ToUnixTimeSeconds().ToString();
             var signature = SignatureGenerator.GenerateSignature(_apiKey, _apiSecret, nonce, content);
 
             request.Headers.Add("X-Api-Key", _apiKey);

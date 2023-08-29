@@ -1,6 +1,7 @@
 ﻿using Blocktrade.Json;
 using System;
 using System.Collections.Generic;
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text;
 
@@ -8,6 +9,18 @@ namespace Blocktrade
 {
     public partial class BlocktradeClient
     {
+        /// <summary>
+        /// Creates a new anonymous instance of the <see cref="BlocktradeClient"/> that only has access to public APIs.
+        /// </summary>
+        public BlocktradeClient()
+        {
+            _httpClient = new HttpClient
+            {
+                BaseAddress = new Uri("https://trade.blocktrade.com/api/v1/")
+            };
+            _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+        }
+
         /// <summary>
         /// Get all available trading assets.
         /// </summary>
@@ -83,6 +96,5 @@ namespace Blocktrade
         /// </summary>
         /// <param name="tradingPairId">ID of <see cref="TradingPair"/>.</param>
         public async Task<AllTrades?> GetTradesAsync(TradingPair tradingPair) => await GetTradesAsync(tradingPair.Id);
-
     }
 }
