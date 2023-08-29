@@ -10,6 +10,7 @@ namespace Blocktrade
 {
     public partial class BlocktradeClient
     {
+
         private readonly string? _apiKey;
 
         public BlocktradeClient(string apiKey, string apiSecret)
@@ -34,10 +35,11 @@ namespace Blocktrade
             return await _httpClient.GetFromJsonAsync<FeeType>("fees", BlocktradeJsonSerializerOptions.Default);
         }
 
-        public async Task<UserOrders?> GetOrdersAsync()
+        public async Task<UserOrders?> GetOrdersAsync(uint offset = OFFSET_DEFAULT, ushort limit = LIMIT_DEFAULT, IEnumerable<string>? statuses = null, IEnumerable<string>? types = null, IEnumerable<int>? tradingPairIds = null)
         {
             _ensureApiKey();
-            return await _httpClient.GetFromJsonAsync<UserOrders>("orders", BlocktradeJsonSerializerOptions.Default);
+            _ensureOffsetAndLimit(offset, limit);
+            return await _httpClient.GetFromJsonAsync<UserOrders>($"orders?offset={offset}&limit={limit}", BlocktradeJsonSerializerOptions.Default);
         }
 
         private void _ensureApiKey()

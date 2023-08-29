@@ -9,10 +9,6 @@ namespace Blocktrade
 {
     public partial class BlocktradeClient
     {
-        private const uint GET_TRADES_OFFSET_DEFAULT = 0;
-        private const ushort GET_TRADES_LIMIT_DEFAULT = 10;
-        private const ushort GET_TRADES_LIMIT_MAX = 1000;
-
         /// <summary>
         /// Creates a new anonymous instance of the <see cref="BlocktradeClient"/> that only has access to public APIs.
         /// </summary>
@@ -84,10 +80,9 @@ namespace Blocktrade
         /// Get trades based on trading pair ID.
         /// </summary>
         /// <param name="tradingPairId">ID of <see cref="TradingPair"/>.</param>
-        public async Task<AllTrades?> GetTradesAsync(int tradingPairId, uint offset = GET_TRADES_OFFSET_DEFAULT, ushort limit = GET_TRADES_LIMIT_DEFAULT)
+        public async Task<AllTrades?> GetTradesAsync(int tradingPairId, uint offset = OFFSET_DEFAULT, ushort limit = LIMIT_DEFAULT)
         {
-            if (limit > GET_TRADES_LIMIT_MAX)
-                throw new ArgumentOutOfRangeException(nameof(limit), "Max value for limit is 1000.");
+            _ensureLimit(limit);
 
             try
             {
@@ -103,6 +98,6 @@ namespace Blocktrade
         /// Get trades based on trading pair ID.
         /// </summary>
         /// <param name="tradingPairId">ID of <see cref="TradingPair"/>.</param>
-        public async Task<AllTrades?> GetTradesAsync(TradingPair tradingPair, uint offset = GET_TRADES_OFFSET_DEFAULT, ushort limit = GET_TRADES_LIMIT_DEFAULT) => await GetTradesAsync(tradingPair.Id, offset, limit);
+        public async Task<AllTrades?> GetTradesAsync(TradingPair tradingPair, uint offset = OFFSET_DEFAULT, ushort limit = LIMIT_DEFAULT) => await GetTradesAsync(tradingPair.Id, offset, limit);
     }
 }
